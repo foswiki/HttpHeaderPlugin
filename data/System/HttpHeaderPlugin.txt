@@ -1,0 +1,52 @@
+---+!! HTTP Header Plugin
+<!--
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
+%SHORTDESCRIPTION%
+
+---++ Usage
+
+This macro lets you set (any) additional HTTP header lines. You may want to use this make 
+a wiki page downloadable as a file or set a different Content-Type.
+
+---++ Examples
+<verbatim>
+%ADDHTTPHEADER{ name="Content-Type" value="text/plain" }%
+</verbatim>
+
+The next block shows the wiki text of a more complex example:
+
+<verbatim>
+%ADDHTTPHEADER{ name="Content-Type" value="text/x-vcard" }%%ADDHTTPHEADER{ name="Content-Disposition" value="attachment; filename=\"%WIKINAME%.vcf\"" }%BEGIN:VCARD
+VERSION:2.1
+FN:%FORMFIELD{ "FirstName" topic="%USERSWEB%.%WIKINAME%" }% %FORMFIELD{ "LastName" topic="%USERSWEB%.%WIKINAME%" }%
+N:%FORMFIELD{ "LastName" topic="%USERSWEB%.%WIKINAME%" }%;%FORMFIELD{ "FirstName" topic="%USERSWEB%.%WIKINAME%" }%;;;
+ADR;HOME:;;%FORMFIELD{ "Address" topic="%USERSWEB%.%WIKINAME%" }%;%FORMFIELD{ "Location" topic="%USERSWEB%.%WIKINAME%" }%;;
+TEL;PREF;HOME:%FORMFIELD{ "Telephone" topic="%USERSWEB%.%WIKINAME%" }%
+END:VCARD
+ %META:PREFERENCE{name="SKIN" title="SKIN" type="Set" value="text"}%
+ %META:PREFERENCE{name="COVER" title="COVER" type="Set" value="text"}%
+</verbatim>
+%GRAY%(Please strip the heading space in front of the META lines.)%ENDCOLOR%
+
+Copying this to a fresh topic lets you download a vcard of the currently logged-in user (assuming there is a filled %SYSTEMWEB%.UserForm.
+
+
+---++ Installation Instructions
+
+%$INSTALL_INSTRUCTIONS%
+
+---++ Info
+
+|  Author(s): | Foswiki:Main.OliverKrueger |
+|  Copyright: | &copy; 2010 Oliver Kr&uuml;ger, (wiki-one.net) |
+|  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
+|  Release: | %$RELEASE% |
+|  Version: | %$VERSION% |
+|  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  21 Sep 2010 | Initial version. |
+|  Dependencies: | %$DEPENDENCIES% |
+|  Home page: | http://foswiki.org/bin/view/Extensions/HttpHeaderPlugin |
+|  Support: | http://foswiki.org/bin/view/Support/HttpHeaderPlugin |
+
+<!-- Do _not_ attempt to edit this topic; it is auto-generated. -->
