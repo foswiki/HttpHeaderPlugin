@@ -32,6 +32,7 @@ our $RELEASE = '1.0';
 our $SHORTDESCRIPTION = 'Add additional lines to the HTTP header of a page.';
 our $NO_PREFS_IN_TOPIC = 1;
 our $additionalHeaders;
+our $inUse = 0;
 
 
 sub initPlugin {
@@ -62,6 +63,7 @@ sub _ADDHTTPHEADER {
         # SMELL: maybe strip some more non-ascii chars
         # SMELL: check the value field-content, too!
         $additionalHeaders->{$header_name} = $header_value;
+        $inUse = 1;
     }
 
     Foswiki::Func::writeDebug("HttpHeaderPlugin ADDHTTPHEADER name:$header_name value:$header_value") if DEBUG;
@@ -72,9 +74,11 @@ sub _ADDHTTPHEADER {
 sub modifyHeaderHandler {
     my ( $headers, $query ) = @_;
 
-    foreach my $header_name (keys %$additionalHeaders) {
-        Foswiki::Func::writeDebug("HttpHeaderPlugin modifyHeaderHandler name:$header_name value:" . $additionalHeaders->{$header_name}) if DEBUG;
-        $headers->{$header_name} = $additionalHeaders->{$header_name};
+    if ($inUse && Foswiki::Func::getContext()->{view}) {
+        foreach my $header_name (keys %$additionalHeaders) {
+            Foswiki::Func::writeDebug("HttpHeaderPlugin modifyHeaderHandler name:$header_name value:" . $additionalHeaders->{$header_name}) if DEBUG;
+            $headers->{$header_name} = $additionalHeaders->{$header_name};
+        }
     }
 
     return "";
