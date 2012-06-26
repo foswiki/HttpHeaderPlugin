@@ -39,12 +39,13 @@ Copying this to a fresh topic lets you download a vcard of the currently logged-
 ---++ Info
 
 |  Author(s): | Foswiki:Main.OliverKrueger |
-|  Copyright: | &copy; 2010 Oliver Kr&uuml;ger, (wiki-one.net) |
+|  Copyright: | &copy; 2010-2012 Oliver Kr&uuml;ger, (wiki-one.net) |
 |  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
-|  21 Sep 2010 | Initial version. |
+|  26 Jun 2012 | 1.01 Fix: Random header injection in persistent perl envs. |
+|  21 Sep 2010 | 1.00 Initial version. |
 |  Dependencies: | %$DEPENDENCIES% |
 |  Home page: | http://foswiki.org/bin/view/Extensions/HttpHeaderPlugin |
 |  Support: | http://foswiki.org/bin/view/Support/HttpHeaderPlugin |

@@ -2,7 +2,7 @@
 #
 # See License details at the end of this file.
 #
-# (c) 2010 Oliver Krueger, oliver@wiki-one.net
+# (c) 2010-2012 Oliver Krueger, oliver@wiki-one.net
 
 
 =pod
@@ -25,10 +25,10 @@ use warnings;
 use Foswiki::Func    ();    # The plugins API
 use Foswiki::Plugins ();    # For the API version
 
-use constant DEBUG => 1;    # toggle me
+use constant DEBUG => 0;    # toggle me
 
 our $VERSION = '$Rev: 8536 $';
-our $RELEASE = '1.0';
+our $RELEASE = '1.01';
 our $SHORTDESCRIPTION = 'Add additional lines to the HTTP header of a page.';
 our $NO_PREFS_IN_TOPIC = 1;
 our $additionalHeaders;
@@ -78,7 +78,9 @@ sub modifyHeaderHandler {
         foreach my $header_name (keys %$additionalHeaders) {
             Foswiki::Func::writeDebug("HttpHeaderPlugin modifyHeaderHandler name:$header_name value:" . $additionalHeaders->{$header_name}) if DEBUG;
             $headers->{$header_name} = $additionalHeaders->{$header_name};
+            delete( $additionalHeaders->{$header_name} );
         }
+        $inUse = 0;
     }
 
     return "";
